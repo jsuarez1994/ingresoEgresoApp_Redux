@@ -6,6 +6,13 @@ import { AuthService } from './auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'ingresoEgresoApp';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.initAuthListener();
+  }
+
 }
