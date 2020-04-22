@@ -25,6 +25,7 @@ import { SetUsertAction } from './auth.actions';
 export class AuthService {
 
   private suscription: Subscription = new Subscription();
+  private usuario: User;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -100,11 +101,17 @@ export class AuthService {
       if (fbUser) {
         this.suscription = this.afDB.doc(`${ fbUser.uid }/usuario`).valueChanges().subscribe((userFB: any) => {
           this.store.dispatch(new SetUsertAction( new User(userFB) ));
+          this.usuario = new User(userFB);
         });
       } else {
+        this.usuario = null;
         this.suscription.unsubscribe();
       }
     });
+  }
+
+  getUser(): User {
+    return {...this.usuario};
   }
 
 }
