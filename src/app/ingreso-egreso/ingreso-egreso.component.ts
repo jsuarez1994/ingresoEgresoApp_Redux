@@ -6,7 +6,7 @@ import { IngresoEgresoService } from './ingreso-egreso.service';
 // SweetAlert
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
+import * as ingresoEgreso from '../ingreso-egreso/ingreso-egreso.reducers';
 import { Subscription } from 'rxjs';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
 
@@ -23,7 +23,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
 
   constructor(
     private ingEgrService: IngresoEgresoService,
-    private store: Store<AppState>
+    private store: Store<ingresoEgreso.AppState>
   ) {}
 
   ngOnInit() {

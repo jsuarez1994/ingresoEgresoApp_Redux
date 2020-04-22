@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, CanLoad } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate, CanLoad {
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService) { }
 
   canActivate() {
     return this.isAuth();
+  }
+
+  canLoad() {
+    return this.isAuth().pipe(take(1));
   }
 
   isAuth() {
