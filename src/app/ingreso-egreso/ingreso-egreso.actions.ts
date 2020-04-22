@@ -8,7 +8,7 @@ export const UNSET_ITEMS = '[INGRESO-EGRESO] Unset Items';
 
 export class SetItemsAction implements Action {
     readonly type = SET_ITEMS;
-    constructor(public items: IngresoEgresoModel[]){}
+    constructor(public items: any[]){}
 }
 
 export class UnsetItemsAction implements Action {

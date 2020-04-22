@@ -5,7 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { AppState } from '../app.reducer';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
-import { SetItemsAction } from './ingreso-egreso.actions';
+import { SetItemsAction, UnsetItemsAction } from './ingreso-egreso.actions';
 import { Subscription } from 'rxjs';
 
 @Injectable({
@@ -24,6 +24,7 @@ export class IngresoEgresoService {
   cancelarSubscription() {
     this.ingresoEgresoItemsSusb.unsubscribe();
     this.ingresoEgresoListenerSusb.unsubscribe();
+    this.store.dispatch(new UnsetItemsAction());
   }
 
   crearIngresoEgreso(ingresoEgreso: IngresoEgresoModel) {
@@ -58,9 +59,16 @@ export class IngresoEgresoService {
             });
           })
     )
-    .subscribe( (coleccion:IngresoEgresoModel[]) => {
+    .subscribe( (coleccion) => {
       this.store.dispatch(new SetItemsAction(coleccion));
     });
+  }
+
+  borrarIngresoEgreso(uid: string) {
+    const user = this.authService.getUser();
+
+    return this.afDB.doc(`${user.uid}/ingreso-egresos/items/${uid}`)
+    .delete();
   }
 
 }

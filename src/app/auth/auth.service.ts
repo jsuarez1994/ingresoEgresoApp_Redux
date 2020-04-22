@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Subscription } from 'rxjs';
-
-// Model
-import { User } from './user.model';
-
-// Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-
-// SweetAlert
-import Swal from 'sweetalert2';
-
+import { Router } from '@angular/router';
 // NGRX
 import { Store } from '@ngrx/store';
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Subscription } from 'rxjs';
+// SweetAlert
+import Swal from 'sweetalert2';
 import { AppState } from '../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
 import { SetUsertAction } from './auth.actions';
+// Model
+import { User } from './user.model';
+
+
+
+
+
 
 @Injectable({
   providedIn: 'root',
